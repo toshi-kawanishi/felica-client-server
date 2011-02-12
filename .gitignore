@@ -18,6 +18,11 @@ pip-log.txt
 .coverage
 .tox
 
+# Django
+*.log
+*.pot
+local_settings.py
+
 # vim
 *.swp
 
