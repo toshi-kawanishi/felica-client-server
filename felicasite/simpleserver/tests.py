@@ -1,23 +1,18 @@
-"""
-This file demonstrates two different styles of tests (one doctest and one
-unittest). These will both pass when you run "manage.py test".
-
-Replace these with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
+from nose.plugins.attrib import attr
+from nose.tools import *
+import json
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+from felicasite.simpleserver.models import Card
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
 
->>> 1 + 1 == 2
-True
-"""}
+class TestCard(TestCase):
 
+    @attr('model')
+    def test_load_json(self):
+        json_data = {'card_id': '0000000000000000'}
+        card = Card()
+
+        card.load_json(json.dumps(json_data))
+
+        eq_(card.card_id, '0000000000000000')

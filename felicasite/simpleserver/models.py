@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+import json
 
 
 class Card(models.Model):
@@ -7,6 +8,10 @@ class Card(models.Model):
 
     def __unicode__(self):
         return self.card_id
+
+    def load_json(self, json_data):
+        json_obj = json.loads(json_data)
+        self.card_id = json_obj['card_id']
 
 
 admin.site.register(Card)
