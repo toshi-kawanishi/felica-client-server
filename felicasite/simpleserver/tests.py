@@ -25,3 +25,4 @@ class TestCardController(TestCase):
     def test_get(self):
         response = self.client.get('/card/0000000000000000')
         eq_(response.status_code, 200)
+        ok_('0000000000000000' in response.content)
