@@ -21,8 +21,15 @@ class TestCard(TestCase):
 
 class TestCardController(TestCase):
 
+    fixtures = ['card.yaml']
+
     @attr('view')
-    def test_get(self):
+    def test_get_when_id_is_valid(self):
         response = self.client.get('/card/0000000000000000')
         eq_(response.status_code, 200)
         ok_('0000000000000000' in response.content)
+
+    @attr('view')
+    def test_get_when_id_is_not_valid(self):
+        response = self.client.get('/card/0000000000000001')
+        eq_(response.status_code, 404)
