@@ -33,3 +33,9 @@ class TestCardController(TestCase):
     def test_get_when_id_is_not_valid(self):
         response = self.client.get('/card/0000000000000001')
         eq_(response.status_code, 404)
+
+    @attr('view')
+    def test_put(self):
+        response = self.client.put('/card/0000000000000002')
+        eq_(response.status_code, 200)
+        ok_(Card.objects.get(card_id='0000000000000002'))
