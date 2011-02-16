@@ -2,7 +2,10 @@ from django.test import TestCase
 from django.test.client import Client
 from nose.plugins.attrib import attr
 from nose.tools import *
-import json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 from felicasite.simpleserver.models import Card
 

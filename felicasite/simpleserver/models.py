@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib import admin
-import json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 
 class Card(models.Model):
