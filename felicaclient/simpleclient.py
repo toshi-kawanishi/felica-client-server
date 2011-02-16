@@ -15,10 +15,9 @@ class SimpleFelicaClient(object):
         while(count < timeout):
             try:
                 felica = api.polling_any()
-                call_method(felica, *args, **kwargs)
             except Exception:
                 print 'error'
+            call_method(felica, *args, **kwargs)
 
             time.sleep(1)
             count += 1
-
