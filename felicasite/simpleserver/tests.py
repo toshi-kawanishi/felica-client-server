@@ -36,6 +36,9 @@ class TestCardController(TestCase):
 
     @attr('view')
     def test_put(self):
-        response = self.client.put('/card/0000000000000002')
+        json_data = {'card_id': '0000000000000002'}
+        response = self.client.put('/card/0000000000000002',
+				   json.dumps(json_data),
+				   'application/json')
         eq_(response.status_code, 200)
         ok_(Card.objects.get(card_id='0000000000000002'))
