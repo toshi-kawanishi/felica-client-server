@@ -18,7 +18,6 @@ def card(request, card_id):
         stream = request.environ['wsgi.input']
         data = stream.read(length)
 
-        card = Card()
-        card.load_json(data)
+        card = Card.load_json(data)
         card.save()
         return HttpResponse(card_id)

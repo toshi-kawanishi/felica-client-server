@@ -15,9 +15,8 @@ class TestCard(TestCase):
     @attr('model')
     def test_load_json(self):
         json_data = {'card_id': '0000000000000000'}
-        card = Card()
 
-        card.load_json(json.dumps(json_data))
+        card = Card.load_json(json.dumps(json_data))
 
         eq_(card.card_id, '0000000000000000')
 
@@ -45,3 +44,12 @@ class TestCardController(TestCase):
 				   'application/json')
         eq_(response.status_code, 200)
         ok_(Card.objects.get(card_id='0000000000000002'))
+
+    @attr('view')
+    def test_put_when_card_id_is_duplicate(self):
+        json_data = {'card_id': '0000000000000003'}
+        for n in range(2):
+            response = self.client.put('/card/0000000000000003',
+                       json.dumps(json_data),
+                       'application/json')
+        ok_(len(Card.objects.filter(card_id='0000000000000003')) == 1)
